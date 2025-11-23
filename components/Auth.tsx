@@ -7,7 +7,7 @@ import { translations, Language } from '../lib/translations';
 
 // --- CONFIGURATION ---
 // REPLACE THIS URL WITH YOUR UPLOADED LOGO URL
-const APP_LOGO_URL = "https://yqthvrupdpxfnmvuvkgi.supabase.co/storage/v1/object/public/store-images/Gemini_Generated_Image_d6fa4pd6fa4pd6fa.png"; 
+const APP_LOGO_URL = "https://yqthvrupdpxfnmvuvkgi.supabase.co/storage/v1/object/public/store-images/Gemini_Generated_Image_d6fa4pd6fa4pd6fa.png";
 // ---------------------
 
 // Simple Google Logo SVG Component
@@ -41,7 +41,7 @@ export const Auth: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [tempLang, setTempLang] = useState<Language>('en');
-  
+
   const [needsConfirmation, setNeedsConfirmation] = useState(false);
 
   const t = translations[tempLang];
@@ -52,14 +52,14 @@ export const Auth: React.FC = () => {
         provider: 'google',
         options: {
           // We force redirect to current origin to handle sandbox environments correctly
-          redirectTo: `${window.location.origin}`,
+          redirectTo: `https://studyflowbrain.netlify.app`,
           queryParams: {
             access_type: 'online',
             prompt: 'select_account'
           }
         }
       });
-      
+
       if (error) throw error;
     } catch (err: any) {
       console.error("Google Login Error:", err);
@@ -89,14 +89,14 @@ export const Auth: React.FC = () => {
           }
         });
         if (error) throw error;
-        
+
         // Check if we need email confirmation (User created but no session)
         if (data.user && !data.session) {
-           setNeedsConfirmation(true);
-           setIsLoading(false);
+          setNeedsConfirmation(true);
+          setIsLoading(false);
         } else {
-           // Auto-confirmed or session active immediately
-           await signup(email, name);
+          // Auto-confirmed or session active immediately
+          await signup(email, name);
         }
       }
     } catch (err: any) {
@@ -106,52 +106,52 @@ export const Auth: React.FC = () => {
   };
 
   if (needsConfirmation) {
-     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
-            <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center animate-in fade-in zoom-in-95">
-                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Mail className="text-green-600 dark:text-green-400" size={32} />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    {t.auth.checkEmail}
-                </h2>
-                <p className="text-gray-500 dark:text-gray-400 mb-8">
-                    {t.auth.checkEmailSubtitle.replace('{email}', email)}
-                </p>
-                <button 
-                   onClick={() => {
-                       setNeedsConfirmation(false);
-                       setIsLogin(true);
-                   }}
-                   className="w-full bg-white border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
-                >
-                    <ArrowLeft size={18} />
-                    {t.auth.backToSignIn}
-                </button>
-            </div>
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center animate-in fade-in zoom-in-95">
+          <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Mail className="text-green-600 dark:text-green-400" size={32} />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            {t.auth.checkEmail}
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">
+            {t.auth.checkEmailSubtitle.replace('{email}', email)}
+          </p>
+          <button
+            onClick={() => {
+              setNeedsConfirmation(false);
+              setIsLogin(true);
+            }}
+            className="w-full bg-white border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+          >
+            <ArrowLeft size={18} />
+            {t.auth.backToSignIn}
+          </button>
         </div>
-     );
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center p-4">
       <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
         <div className="p-8 w-full relative">
-          
+
           <div className="absolute top-4 right-4">
-             <button 
-                onClick={() => setTempLang(l => l === 'en' ? 'es' : 'en')}
-                className="flex items-center gap-1 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-primary-600"
-             >
-                <Globe size={14} />
-                {tempLang.toUpperCase()}
-             </button>
+            <button
+              onClick={() => setTempLang(l => l === 'en' ? 'es' : 'en')}
+              className="flex items-center gap-1 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-primary-600"
+            >
+              <Globe size={14} />
+              {tempLang.toUpperCase()}
+            </button>
           </div>
 
           <div className="flex items-center gap-3 mb-8 justify-center">
             {/* CUSTOM LOGO */}
             <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-primary-600/20">
-               <img src={APP_LOGO_URL} alt="Logo" className="w-full h-full object-contain" />
+              <img src={APP_LOGO_URL} alt="Logo" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600">
               StudyFlow AI
@@ -173,21 +173,21 @@ export const Auth: React.FC = () => {
           )}
 
           <div className="space-y-4">
-             {/* Google Button */}
-             <button
-                onClick={handleGoogleLogin}
-                className="w-full bg-white text-gray-700 dark:bg-gray-700 dark:text-white border border-gray-200 dark:border-gray-600 font-medium py-3 rounded-xl shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 transition-all flex items-center justify-center gap-3"
-             >
-                <GoogleIcon />
-                {t.auth.googleSignIn}
-             </button>
+            {/* Google Button */}
+            <button
+              onClick={handleGoogleLogin}
+              className="w-full bg-white text-gray-700 dark:bg-gray-700 dark:text-white border border-gray-200 dark:border-gray-600 font-medium py-3 rounded-xl shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 transition-all flex items-center justify-center gap-3"
+            >
+              <GoogleIcon />
+              {t.auth.googleSignIn}
+            </button>
 
-             <div className="relative flex items-center justify-center">
-                <div className="absolute border-t border-gray-200 dark:border-gray-700 w-full"></div>
-                <span className="relative bg-white dark:bg-gray-800 px-3 text-xs text-gray-400 uppercase tracking-wider">
-                   {t.auth.orContinueWith}
-                </span>
-             </div>
+            <div className="relative flex items-center justify-center">
+              <div className="absolute border-t border-gray-200 dark:border-gray-700 w-full"></div>
+              <span className="relative bg-white dark:bg-gray-800 px-3 text-xs text-gray-400 uppercase tracking-wider">
+                {t.auth.orContinueWith}
+              </span>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {!isLogin && (
@@ -203,7 +203,7 @@ export const Auth: React.FC = () => {
                   />
                 </div>
               )}
-              
+
               <div className="relative">
                 <Mail className="absolute left-3 top-3.5 text-gray-400" size={18} />
                 <input

@@ -1,0 +1,20 @@
+{
+    "name": "StudyFlow AI",
+    "short_name": "StudyFlow",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#0d9488",
+    "icons": [
+        {
+            "src": "https://yqthvrupdpxfnmvuvkgi.supabase.co/storage/v1/object/public/store-images/Gemini_Generated_Image_d6fa4pd6fa4pd6fa.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://yqthvrupdpxfnmvuvkgi.supabase.co/storage/v1/object/public/store-images/Gemini_Generated_Image_d6fa4pd6fa4pd6fa.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
