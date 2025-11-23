@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useStore } from '../store/useStore';
 import { StoreItem } from '../types';
@@ -37,7 +36,8 @@ const StoreItemCard: React.FC<{
     language: string;
 }> = ({ item, isOwned, onBuy, onImageClick, getImage, language }) => {
     const [imgError, setImgError] = useState(false);
-    // REMOVED TIMESTAMP (?t=...) to allow browser caching. This significantly speeds up loading.
+    
+    // CRITICAL PERFORMANCE FIX: Removed ?t=${Date.now()} to allow browser caching
     const imageUrl = getImage(item.image_path);
     const rarityClass = getRarityClass(item.rarity);
     
