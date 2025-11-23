@@ -1,0 +1,7 @@
+{
+  "name": "StudyFlow AI",
+  "description": "An intelligent study assistant combining adaptive planning, gamified focus tools, and a Gemini-powered AI tutor.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
