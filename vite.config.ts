@@ -4,18 +4,11 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: './',
   plugins: [react()],
   build: {
     outDir: 'dist',
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'recharts', 'lucide-react', '@supabase/supabase-js', '@google/genai'],
-        },
-      },
-    },
   },
   // Define env prefix for client-side access
   envPrefix: 'VITE_',
